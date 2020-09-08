@@ -1,0 +1,57 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winCertificado" ?>
+<zk>
+	<window border="none" hflex="1" vflex="1"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.bombero.controlador.ECertificadosC')" id="winCertificado">
+		<vlayout hflex="1" vflex="1">
+			<groupbox hflex="1">
+				<hbox align="center" hflex="1" pack="center">
+					<label value="Certificados de aprobación" style="font-size:20px;font-weight:bold;"/>
+				</hbox>
+			</groupbox>
+			<groupbox hflex="1" vflex="1">
+				<vlayout hflex="1" vflex="1">
+					<hbox align="center" hflex="1" pack="center">
+						<label value="Seleccione Periodo" style="font-size:14px;font-weight:bold;"/>
+					</hbox>
+					<hbox align="center" hflex="1" pack="center">
+						<combobox placeholder="Seleccione periodo" width="500px" id="cboPeriodo"
+								model="@load(vm.periodos)" onSelect="@command('seleccionarPersonas')"
+								selectedItem="@bind(vm.periodoSeleccionada)">
+							<template name="model">
+								<comboitem label="${each.descripcion}"/>
+							</template>
+						</combobox>
+					</hbox>
+					<hbox align="center" hflex="1" pack="center">
+						<button label="Imprimir certificado" id="btnImprimir" onClick="@command('imprimirCertificado')"/>
+					</hbox>
+					<groupbox hflex="1" vflex="1">
+						<listbox id="lstPersonas" hflex="1" vflex="1"
+								model="@load(vm.personaLista)"
+								selectedItem="@bind(vm.personaSeleccionado)">
+							<listhead>
+									<listheader label="Cedula" />
+									<listheader label="Nombres" />
+									<listheader label="Tipo de Sangre" />
+									<listheader label="Antecedentes" />
+									<listheader label="Genero" />
+									<listheader label="Fecha Nacimiento" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell label="${each.cedula}" />
+										<listcell label="${each.nombre} ${each.apellido}" />
+										<listcell label="${each.tipoSangre}" />
+										<listcell label="${each.antecedentesPenales}" />
+										<listcell label="${each.genero}" />
+										<listcell label="${each.fechaNacimiento}" />
+									</listitem>
+								</template>
+						</listbox>
+					</groupbox>
+				</vlayout>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

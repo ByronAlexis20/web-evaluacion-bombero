@@ -1,0 +1,5 @@
+#ignorar los directorios siguientes
+build/
+.settings/
+target/
+.classpath

@@ -1,0 +1,44 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winCompaniaEditar" ?>
+<?script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js" ?>
+<?link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" ?>
+<zk>
+	<window id="winCompaniaEditar" border="normal"  width="37%"
+		 apply="com.bombero.controlador.ACompaniaEditarC">
+		<caption sclass="fn-caption"
+			label="COMPAÑIAS" />
+		<vlayout>
+			<grid hflex="1">
+				<columns>
+					<column align="right" hflex="min" />
+					<column/>
+				</columns>
+				<rows>
+					<row>
+						<cell>Nombre Compañía:</cell>
+						<cell>
+							<textbox
+								class="form-control form-control-sm" placeholder="Nombre"
+								id="txtNombre"
+								value="@{winCompaniaEditar$composer.compania.nombre}" />
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Dirección:</cell>
+						<cell>
+							<textbox
+								class="form-control form-control-sm" id="txtDireccion"
+								placeholder="Dirección"
+								value="@{winCompaniaEditar$composer.compania.direccion}" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<hlayout hflex="1" height="1">
+				<div align="center" hflex="1">
+					<button id="btnGrabar" label="Grabar"/>
+					<button id="btnSalir" label="Salir"/>			
+				</div>
+			</hlayout>
+		</vlayout>
+	</window>
+</zk>

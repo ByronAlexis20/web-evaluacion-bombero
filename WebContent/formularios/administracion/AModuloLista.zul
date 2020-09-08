@@ -1,0 +1,56 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winModuloLista" ?>
+<?link rel="stylesheet" type="text/css" href="/css/estilos.css"?>
+<zk>
+	<window id="winModuloLista" border="none"
+		apply="com.bombero.controlador.AModuloListaC" hflex="1" vflex="1">
+		<div class="container" vflex="1" hflex="1">
+			<div class="container" xmlns:n="native">
+				<n:h4 class="text-center">MÓDULOS</n:h4>
+			</div>
+			<div class="btn-toolbar">
+				<div class="btn-group">
+					<button id="btnNuevo" iconSclass="z-icon-plus"
+						height="40px" width="100px">
+						Nuevo
+					</button>
+					<button id="btnEditar" iconSclass="z-icon-pencil"
+						height="40px" width="100px">
+						Editar
+					</button>
+					<button id="btnEliminar" iconSclass="z-icon-trash-o"
+						height="40px" width="100px">
+						Eliminar
+					</button>
+				</div>
+			</div>
+			<separator height="10px" orient="vertical" />
+			<div class="row">
+				<textbox id="txtBuscar" width="92%" />
+				<separator orient="horizontal" width="10px" />
+				<button id="btnBuscar" label="Buscar" class="btn-sm"
+					iconSclass="z-icon-search" />
+			</div>
+			<separator height="10px" orient="vertical" />
+			<div class="row" vflex="1">
+
+				<listbox id="lstModulo" hflex="1" vflex="1"
+					model="@{winModuloLista$composer.moduloLista}"
+					selectedItem="@{winModuloLista$composer.moduloSeleccionado}">
+					<listhead>
+						<listheader label="Código" />
+						<listheader label="Modulo" />
+						<listheader label="Estado" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.idModulo}" />
+							<listcell label="${each.modulo}" />
+							<listcell label="${each.estado}" />
+						</listitem>
+					</template>
+				</listbox>
+			</div>
+
+		</div>
+	</window>
+</zk>

@@ -1,0 +1,61 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winRealizarAsignacion" ?>
+<zk>
+	<window id="winRealizarAsignacion" border="normal"  width="70%"
+		 apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.bombero.controlador.ASRealizarAsignacionC')">
+		<caption sclass="fn-caption"
+			label="Realizar Asignación de guardias" />
+		<vlayout>
+			<grid hflex="1">
+				<columns>
+					<column align="right" hflex="min" />
+					<column/>
+				</columns>
+				<rows>
+					<row align="center">
+						<cell align="center" colspan="2">
+							<label value="Compañía seleccionada" style="font-size:18px;font-weight:bold;"></label>
+						</cell>
+					</row>
+					<row align="center">
+						<cell align="center" colspan="2">
+							<label value="Compania" id="lblCompania" style="font-size:18px;font-weight:bold;"></label>
+						</cell>
+					</row>
+					<row align="center">
+						<cell align="center" colspan="2">
+							<label value="Listado de bomberos sin asignar" style="font-size:14px;font-weight:bold;"></label>
+						</cell>
+					</row>
+					<row align="center">
+						<cell align="center" colspan="2">
+							<combobox placeholder="Seleccione bombero" width="500px" id="cboBombero"
+									model="@load(vm.listaBomberos)" 
+									selectedItem="@bind(vm.bomberoSeleccionado)">
+								<template name="model">
+									<comboitem label="${each.persona.nombre} ${each.persona.apellido}"/>
+								</template>
+							</combobox>
+						</cell>
+					</row>
+					<row align="center">
+						<cell align="center" colspan="2">
+							<hlayout>
+								<label>Fecha de Inicio: </label>
+								<datebox id="dtpFechaInicio"/>
+								<label>Fecha Fin: </label>
+								<datebox id="dtpFechaFin"/>
+							</hlayout>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<hlayout hflex="1" height="1">
+				<div align="center" hflex="1">
+					<button id="btnGrabar" label="Grabar" onClick="@command('grabar')"/>
+					<button id="btnSalir" label="Salir" onClick="@command('salir')"/>			
+				</div>
+			</hlayout>
+		</vlayout>
+	</window>
+</zk>

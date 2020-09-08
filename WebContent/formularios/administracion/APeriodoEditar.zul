@@ -1,0 +1,47 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winPeriodoEditar" ?>
+<?script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js" ?>
+<?link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" ?>
+<zk>
+	<window id="winPeriodoEditar" border="normal"  width="37%"
+		 apply="com.bombero.controlador.APeriodoEditarC">
+		<caption sclass="fn-caption"
+			label="REGISTRO DE PERIODOS" />
+		<vlayout>
+			<grid hflex="1">
+				<columns>
+					<column align="right" hflex="min" />
+					<column/>
+				</columns>
+				<rows>
+					<row>
+						<cell>Descripción:</cell>
+						<cell>
+							<textbox
+								class="form-control form-control-sm" placeholder="Descripción del periodo"
+								id="txtDescripcion"
+								value="@{winPeriodoEditar$composer.periodo.descripcion}" />
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Fecha Inicio:</cell>
+						<cell>
+							<datebox id="dtpFechaInicio" />
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Fecha Fin:</cell>
+						<cell>
+							<datebox id="dtpFechaFin"/>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<hlayout hflex="1" height="1">
+				<div align="center" hflex="1">
+					<button id="btnGrabar" label="Grabar"/>
+					<button id="btnSalir" label="Salir"/>			
+				</div>
+			</hlayout>
+		</vlayout>
+	</window>
+</zk>

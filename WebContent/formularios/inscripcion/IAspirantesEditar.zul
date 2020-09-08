@@ -1,0 +1,183 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winAspirantesEditar" ?>
+<?script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js" ?>
+<?link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" ?>
+<zk>
+	<window id="winAspirantesEditar" border="normal"  width="50%"
+		 apply="com.bombero.controlador.IAspirantesEditarC">
+		<caption sclass="fn-caption"
+			label="REGISTRO DE ASPIRANTES A BOMBEROS" />
+		<vlayout>
+			<grid hflex="1">
+				<columns>
+					<column align="right" hflex="min" />
+					<column/>
+					<column align="right" hflex="min" />
+					<column/>
+				</columns>
+				<rows>
+					<row>
+						<cell>Cédula:</cell>
+						<cell>
+							<textbox class="form-control form-control-sm" maxlength="10" placeholder="Cédula"
+								id="txtCedula" width="50%" xmlns:w="client">
+								<attribute w:name="doKeyDown_"><![CDATA[
+									function (evt) {
+										var keyCode = event.keyCode;
+										if( keyCode == 8 // back space
+											|| keyCode == 13 // enter
+											|| keyCode == 16 // enter
+											|| (keyCode >= 35 && keyCode <= 40) // home, end, arrows
+											|| keyCode == 46) { // Delete
+											this.$doKeyDown_(evt);
+										} else if ( !evt.shiftKey &&  // only do without shift key
+											(keyCode >= 48 && keyCode <= 57)
+											|| (keyCode >= 96 && keyCode <= 105)) {// number range
+											this.$doKeyDown_(evt);
+										} else {
+											evt.stop();
+											return;
+										}
+									}
+								]]></attribute>
+							</textbox>
+						</cell>
+						<cell sclass="row-title">Teléfono:</cell>
+						<cell>
+							<textbox maxlength="10" xmlns:w="client"
+								class="form-control form-control-sm" id="txtTelefono"
+								placeholder="Teléfono" width="50%">
+								<attribute w:name="doKeyDown_"><![CDATA[
+									function (evt) {
+										var keyCode = event.keyCode;
+										if( keyCode == 8 // back space
+											|| keyCode == 13 // enter
+											|| keyCode == 16 // enter
+											|| (keyCode >= 35 && keyCode <= 40) // home, end, arrows
+											|| keyCode == 46) { // Delete
+											this.$doKeyDown_(evt);
+										} else if ( !evt.shiftKey &&  // only do without shift key
+											(keyCode >= 48 && keyCode <= 57)
+											|| (keyCode >= 96 && keyCode <= 105)) {// number range
+											this.$doKeyDown_(evt);
+										} else {
+											evt.stop();
+											return;
+										}
+									}
+								]]></attribute>
+							</textbox>
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Nombres:</cell>
+						<cell>
+							<textbox
+								class="form-control form-control-sm" id="txtNombres"
+								placeholder="Nombres" />
+						</cell>
+						<cell sclass="row-title">Apellidos:</cell>
+						<cell>
+							<textbox
+								class="form-control form-control-sm" id="txtApellidos"
+								placeholder="Apellidos" />
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Email:</cell>
+						<cell>
+							<textbox
+								class="form-control form-control-sm" id="txtEmail"
+								placeholder="Email" />
+						</cell>
+						<cell sclass="row-title">F. Nacimiento:</cell>
+						<cell>
+							<datebox
+								class="form-control form-control-sm" id="dtpFechaNacimiento"
+								value="@{winAspirantesEditar$composer.aspirante.fechaNacimiento}" />
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Tipo Sangre:</cell>
+						<cell>
+							<combobox id="cboTipoSangre">
+								<comboitem value="A+" label="A+"/>
+								<comboitem value="B+" label="B+"/>
+								<comboitem value="AB+" label="AB+"/>
+								<comboitem value="O+" label="O+"/>
+								<comboitem value="A-" label="A-"/>
+								<comboitem value="B-" label="B-"/>
+								<comboitem value="AB-" label="AB-"/>
+								<comboitem value="O-" label="O-"/>
+							</combobox>
+						</cell>
+						<cell sclass="row-title">Antecedentes:</cell>
+						<cell>
+							<combobox id="cboAntecedentes">
+								<comboitem value="S" label="SI"/>
+								<comboitem value="N" label="NO"/>
+							</combobox>
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Género:</cell>
+						<cell>
+							<combobox id="cboGenero">
+								<comboitem value="MASCULINO" label="MASCULINO"/>
+								<comboitem value="FEMENINO" label="FEMENINO"/>
+								<comboitem value="OTRO" label="OTRO"/>
+							</combobox>
+						</cell>
+						<cell sclass="row-title">Apto prueba fisica:</cell>
+						<cell>
+							<checkbox id="chkPruebaFisica" checked="true"/>
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Cert. médico:</cell>
+						<cell>
+							<hbox>
+							<textbox
+								class="form-control  form-control-sm" id="txtCertificadoMedico"
+								style="justify-content: left;" disabled="true"  width="80%" placeholder="Sin archivo..."/>
+							<button id="uploadCertificado"
+								iconSclass="z-icon-upload" upload="true,accept=.pdf"/>
+								</hbox>
+						</cell>
+						<cell sclass="row-title">Tit. bachiller:</cell>
+						<cell>
+						<hbox>
+							<textbox
+								class="form-control  form-control-sm" id="txtTituloBachiller"
+								style="justify-content: left;" disabled="true"  width="80%" placeholder="Sin archivo..."/>
+							<button id="uploadTitulo" iconSclass="z-icon-upload" upload="true,accept=.pdf"/>
+							</hbox>
+						</cell>
+					</row>
+					
+					<row>
+						<cell sclass="row-title">Dirección:</cell>
+						<cell colspan="3">
+							<textbox
+								class="form-control form-control-sm" id="txtDireccion"
+								placeholder="Dirección" />
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Ref. domiciliaria:</cell>
+						<cell colspan="3">
+							<textbox
+								class="form-control form-control-sm" id="txtReferencia"
+								placeholder="Referencia domiciliaria" />
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<hlayout hflex="1" height="1">
+				<div align="center" hflex="1">
+					<button id="btnGrabar" label="Grabar"/>
+					<button id="btnSalir" label="Salir"/>			
+				</div>
+			</hlayout>
+		</vlayout>
+	</window>
+</zk>

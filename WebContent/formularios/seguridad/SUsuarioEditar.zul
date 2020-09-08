@@ -1,0 +1,184 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winUsuarioRegistro" ?>
+<?script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js" ?>
+<?link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" ?>
+
+<zk>
+	<window id="winUsuarioRegistro"
+		border="none" vflex="min" width="60%" contentStyle="overflow:auto;"
+		apply="com.bombero.controlador.SUsuarioEditarC">
+		<caption sclass="fn-caption" label="Registro de usuarios"
+			style="font: 120% sans-serif; font-weight: bold; color:white" />
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-group row">
+						<label
+							class="col-form-label col-md-3 col-sm-5 col-lg-3">
+							Nombre:
+						</label>
+						<div class="col-sm-7 col-md-9 col-lg-9">
+							<textbox
+								class="form-control form-control-sm" placeholder="Nombre"
+								id="txtNombre"
+								value="@{winUsuarioRegistro$composer.usuario.nombre}" />
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-group row">
+						<label
+							class="col-form-label col-md-3 col-sm-5 col-lg-3">
+							Apellido:
+						</label>
+						<div class="col-sm-7 col-md-9 col-lg-9">
+							<textbox
+								class="form-control form-control-sm" id="txtApellido"
+								placeholder="Apellido"
+								value="@{winUsuarioRegistro$composer.usuario.apellido}" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-group row">
+						<label
+							class="col-form-label col-md-3 col-sm-5 col-lg-3">
+							Cédula:
+						</label>
+						<div class="col-sm-7 col-md-9 col-lg-9">
+							<textbox
+								class="form-control form-control-sm" id="txtCedula"
+								maxlength="10" xmlns:w="client" placeholder="Cédula"
+								value="@{winUsuarioRegistro$composer.usuario.cedula}">
+								<attribute w:name="doKeyDown_"><![CDATA[
+									function (evt) {
+										var keyCode = event.keyCode;
+										if( keyCode == 8 // back space
+											|| keyCode == 13 // enter
+											|| keyCode == 16 // enter
+											|| (keyCode >= 35 && keyCode <= 40) // home, end, arrows
+											|| keyCode == 46) { // Delete
+											this.$doKeyDown_(evt);
+										} else if ( !evt.shiftKey &&  // only do without shift key
+											(keyCode >= 48 && keyCode <= 57)
+											|| (keyCode >= 96 && keyCode <= 105)) {// number range
+											this.$doKeyDown_(evt);
+										} else {
+											evt.stop();
+											return;
+										}
+									}
+								]]></attribute>
+							</textbox>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-group row">
+						<label
+							class="col-form-label col-md-3 col-sm-5 col-lg-3">
+							Teléfono:
+						</label>
+						<div class="col-sm-7 col-md-9 col-lg-9">
+							<textbox
+								class="form-control form-control-sm" id="txtTelefono"
+								maxlength="10" xmlns:w="client" placeholder="Teléfono"
+								value="@{winUsuarioRegistro$composer.usuario.telefono}">
+								<attribute w:name="doKeyDown_"><![CDATA[
+									function (evt) {
+										var keyCode = event.keyCode;
+										if( keyCode == 8 // back space
+											|| keyCode == 13 // enter
+											|| keyCode == 16 // enter
+											|| (keyCode >= 35 && keyCode <= 40) // home, end, arrows
+											|| keyCode == 46) { // Delete
+											this.$doKeyDown_(evt);
+										} else if ( !evt.shiftKey &&  // only do without shift key
+											(keyCode >= 48 && keyCode <= 57)
+											|| (keyCode >= 96 && keyCode <= 105)) {// number range
+											this.$doKeyDown_(evt);
+										} else {
+											evt.stop();
+											return;
+										}
+									}
+								]]></attribute>
+							</textbox>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-group row">
+						<label
+							class="col-form-label col-md-3 col-sm-5 col-lg-3">
+							Perfil:
+						</label>
+						<div class="col-sm-7 col-md-9 col-lg-9">
+							<combobox id="cboPerfil" hflex="1"
+								model="@{winUsuarioRegistro$composer.perfiles}"
+								selectedItem="@{winUsuarioRegistro$composer.usuario.perfil}"
+								value="@{winUsuarioRegistro$composer.usuario.perfil.perfil}"
+								readonly="true">
+								<template name="model">
+									<comboitem label="${each.perfil}" />
+								</template>
+							</combobox>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-group row">
+						<label
+							class="col-form-label col-md-3 col-sm-5 col-lg-3">
+							Usuario:
+						</label>
+						<div class="col-sm-7 col-md-9 col-lg-9">
+							<textbox
+								class="form-control  form-control-sm" placeholder="Usuario"
+								id="txtUsuario"
+								value="@{winUsuarioRegistro$composer.usuario.usuario}" />
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<div class="form-group row">
+						<label
+							class="col-form-label col-md-3 col-sm-5 col-lg-3">
+							Clave:
+						</label>
+						<div class="col-sm-7 col-md-9 col-lg-9">
+							<textbox
+								class="form-control form-control-sm" id="txtClave"
+								type="password" placeholder="Clave" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="text-center">
+				<button id="btnGrabar" iconSclass="z-icon-save">
+					Grabar
+				</button>
+				<button id="btnSalir" iconSclass="z-icon-sign-out">
+					Salir
+				</button>
+			</div>
+
+
+		</div>
+
+	</window>
+</zk>

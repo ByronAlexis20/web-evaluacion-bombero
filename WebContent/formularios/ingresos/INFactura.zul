@@ -1,0 +1,163 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winFactura" ?>
+<zk>
+	<window id="winFactura" border="none" hflex="1" vflex="1"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.bombero.controlador.INFacturaC')">
+		<vlayout hflex="1" vflex="1">
+			<groupbox hflex="1">
+				<hlayout hflex="1">
+					<div class="container" hflex="1" xmlns:n="native"
+						align="center">
+						<n:h4 class="text-center">
+							FACTURA PARA EL INGRESO DE EQUIPOS DE VESTIMENTA
+						</n:h4>
+					</div>
+				</hlayout>
+			</groupbox>
+			<vbox hflex="1" vflex="1" align="center" sclass="container" width="80%">
+				<groupbox hflex="1">
+					<caption label="Datos de la factura"/>
+					<hbox align="center">
+						<hbox align="center" width="60%">
+							<grid>
+								<columns>
+									<column align="center" />
+								</columns>
+								<rows>
+									<row>
+										<cell>
+											<div align="center">
+												<hbox align="center">
+													No. Factura: 
+													<textbox placeholder="No. Factura"
+														id="txtNoFactura" width="100%"/>
+													<button width="100%" iconSclass="z-icon-search" id="btnBuscarFactura" onClick="@command('buscarFactura')"/>
+													<separator orient="horizontal" width="5%"/>
+													Fecha:
+													<datebox id="dtpFecha" width="100%"/>
+												</hbox>
+											</div>
+										</cell>
+									</row>
+								</rows>
+							</grid>
+						</hbox>
+					</hbox>
+					<hbox hflex="1">
+						<groupbox  >
+							<caption label="Datos del equipo de vestimenta"/>
+							<grid hflex="1">
+								<columns>
+									<column align="right" hflex="min" />
+									<column/>
+									<column align="right" hflex="min" />
+									<column/>
+								</columns>
+								<rows>
+									<row>
+										<cell>Cod. Equipo:</cell>
+										<cell colspan="3">
+											<hbox>
+											
+												<textbox placeholder="Código equipo" id="txtCodigo"
+													width="100%"/>
+												<button width="100%" id="btnBuscarEquipo" onClick="@command('buscarEquipoVestimenta')" iconSclass="z-icon-search" />
+											</hbox>
+										</cell>
+									</row>
+									
+									<row>
+										<cell>Descripción:</cell>
+										<cell colspan="3">
+											<textbox width="100%" placeholder="Descripción" id="txtDescripcionEquipo"/>
+										</cell>
+									</row>
+									<row>
+										<cell>Precio:</cell>
+										<cell>
+											<textbox width="100%"  maxlength="10" placeholder="Precio" id="txtPrecioUnitario"/>
+										</cell>
+										<cell>Cantidad:</cell>
+										<cell>
+											<textbox width="100%" placeholder="Cantidad" id="txtCantidad" xmlns:w="client">
+												<attribute w:name="doKeyDown_"><![CDATA[
+													function (evt) {
+														var keyCode = event.keyCode;
+														if( keyCode == 8 // back space
+															|| keyCode == 13 // enter
+															|| keyCode == 16 // enter
+															|| (keyCode >= 35 && keyCode <= 40) // home, end, arrows
+															|| keyCode == 46) { // Delete
+															this.$doKeyDown_(evt);
+														} else if ( !evt.shiftKey &&  // only do without shift key
+															(keyCode >= 48 && keyCode <= 57)
+															|| (keyCode >= 96 && keyCode <= 105)) {// number range
+															this.$doKeyDown_(evt);
+														} else {
+															evt.stop();
+															return;
+														}
+													}
+												]]></attribute>
+											</textbox>
+										</cell>
+									</row>
+									<row align="center">
+										<cell colspan="4" align="center">
+											<button label="Agregar" onClick="@command('agregarEquipo')" iconSclass="z-icon-angle-double-down" id="btnAgregarEquipo"/>
+											<button label="Quitar" onClick="@command('quitarDetalle')" iconSclass="z-icon-angle-double-up" id="btnQuitarEquipo"/>
+										</cell>
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+						<groupbox width="200px" vflex="1">
+							<caption label="Totales"/>
+							<vbox align="center">
+								<grid hflex="1" vflex="1">
+									<columns>
+										<column align="right" hflex="min" />
+										<column/>
+									</columns>
+									<rows>
+										<row>
+											<cell>Total:</cell>
+											<cell>
+												<textbox id="txtTotal" placeholder="Total" value="0.00"/>
+											</cell>
+										</row>
+									</rows>
+								</grid>
+							</vbox>
+						</groupbox>
+					</hbox>
+				</groupbox>
+				<groupbox hflex="1" vflex="1">
+					<caption label="Detalle de la factura"/>
+					<listbox id="lstDetalle" hflex="1" vflex="1"
+						selectedItem="@bind(vm.detalleSeleccionado)">
+						<listhead>
+							<listheader label="Equipo de Vestimenta" />
+							<listheader label="Cantidad" width="100px"/>
+							<listheader label="P. Unitario" width="100px"/>
+							<listheader label="Total" width="100px"/>
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell label="${each.equiposVestimenta.descripcion}" />
+								<listcell label="${each.cantidad}" />
+								<listcell label="${each.precioUnitario}" />
+								<listcell label="${each.total}" />
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+				<hbox align="center" pack="center">
+					<button label="Grabar" onClick="@command('grabar')"/>
+					<button label="Nuevo" onClick="@command('nuevo')"/>
+				</hbox>
+			</vbox>
+
+		</vlayout>
+	</window>
+</zk>	

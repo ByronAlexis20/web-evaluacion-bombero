@@ -1,0 +1,77 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winPregunta" ?>
+<zk>
+	<window id="winPregunta" border="normal" hflex="1" vflex="1"
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.bombero.controlador.EPreguntaEditarC')"
+		width="60%" height="80%">
+		<caption sclass="fn-caption" label="REGISTRO DE PREGUNTAS" />
+		<vlayout hflex="1" vflex="1">
+			<vbox hflex="1" vflex="1" align="center"
+				sclass="container">
+
+				<hbox hflex="1">
+					<groupbox>
+						<caption label="Pregunta" />
+						<grid hflex="1">
+							<columns>
+								<column align="right" hflex="min" />
+								<column />
+							</columns>
+							<rows>
+								<row>
+									<cell  align="left">
+										Pregunta:
+									</cell>
+									<cell align="right">
+										<hbox align="end">
+										<button id="btnEditar" onClick="@command('editar')" label="Editar" iconSclass="z-icon-pencil"></button>
+										<separator orient="horizontal" width="5%"/>
+										<button id="btnGrabarPregunta" onClick="@command('grabarPregunta')" label="Grabar" iconSclass="z-icon-save"></button>
+										</hbox>
+									</cell>
+								</row>
+								<row>
+									<cell colspan="2" align="left"
+										rowspan="3">
+										<textbox id="txtPregunta"
+											multiline="true" width="100%" />
+									</cell>
+								</row>
+								<row></row>
+								<row></row>
+							</rows>
+						</grid>
+					</groupbox>
+				</hbox>
+				<hlayout hflex="1" height="1">
+					<div align="center" hflex="1">
+						<button id="btnAgregar" onClick="@command('agregarRespuesta')" label="Agregar Respuesta" />
+						<button id="btnQuitarRespuesta" onClick="@command('quitarRespuesta')" label="Quitar Respuesta" />
+					</div>
+				</hlayout>
+				<groupbox hflex="1" vflex="1">
+					<caption label="Respuesta" />
+					<listbox id="lstRespuestas" hflex="1" vflex="1"
+					model="@load(vm.listaRespuestas)"
+					selectedItem="@bind(vm.respuestaSeleccionada)">
+						<listhead>
+							<listheader label="Correcta" width="100px" />
+							<listheader label="Respuesta" />
+						</listhead>
+						<template name="model">
+							<listitem>
+								<listcell label="${each.correcta}"/>
+								<listcell label="${each.respuesta}"/>
+							</listitem>
+						</template>
+					</listbox>
+				</groupbox>
+			</vbox>
+			<hlayout hflex="1" height="1">
+				<div align="center" hflex="1">
+					<button id="btnSalir" label="Salir" onClick="@command('salir')" />
+				</div>
+			</hlayout>
+		</vlayout>
+	</window>
+</zk>

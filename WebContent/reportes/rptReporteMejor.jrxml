@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="btnReporteAnual" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aae8ad95-b650-4a30-bc45-e71e1dc10b90">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mysql bombero evaluacion"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="ID_PERIODO" class="java.lang.Integer"/>
+	<parameter name="PERIODO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT concat(p.nombre, ' ', p.apellido) As Nombre,p.cedula,
+truncate((
+    Case when (select sum(r.calificacion)
+    from resultados_evaluacion r where r.estado = 'A' and r.id_persona = p.id_persona) is null 
+    then 0.00 else (select sum(r.calificacion)
+    from resultados_evaluacion r where r.estado = 'A' and r.id_persona = p.id_persona) end
+),0) as nota,
+(case when 
+truncate((
+    Case when (select sum(r.calificacion)
+    from resultados_evaluacion r where r.estado = 'A' and r.id_persona = p.id_persona) is null 
+    then 0.00 else (select sum(r.calificacion)
+    from resultados_evaluacion r where r.estado = 'A' and r.id_persona = p.id_persona) end
+),0) > 15 then 'APROBADO' else 'REPROBADO' end) as estado
+from persona p where p.id_periodo = $P{ID_PERIODO}   and p.estado = 'A'
+order by nota desc
+limit 1]]>
+	</queryString>
+	<field name="Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+	</field>
+	<field name="cedula" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="cedula"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="persona"/>
+	</field>
+	<field name="nota" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="nota"/>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="139" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="69" width="550" height="22" forecolor="#DE0404" uuid="9da1a7b9-dbeb-491c-ae80-6042df636390"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUERPO DE BOMBEROS DE LA LIBERTAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="92" width="550" height="22" forecolor="#DE0404" uuid="68185da0-881e-42cd-a93d-a7ca777f8c23"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[“JOSUE ROBLES BODERO”]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="114" width="550" height="22" forecolor="#DE0404" uuid="caae8e7a-a1f0-464e-857a-dd2638853536"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LA LIBERTAD – SANTA ELENA. ECUADOR]]></text>
+			</staticText>
+			<image>
+				<reportElement x="242" y="-1" width="68" height="70" uuid="75bad622-ac1c-460f-a0c8-89596d3ccf7a"/>
+				<imageExpression><![CDATA["cb_logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="11" width="550" height="19" uuid="ded969d0-2929-464f-a8a6-a2586e9896d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte del Informe Anual de los Aspirantes ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="115" y="40" width="244" height="20" uuid="57a85833-7e3a-4a22-ac47-2cdfbe3efad4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6ec1acaf-e268-47d8-b19c-700597c9f715"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="40" width="80" height="20" uuid="431d8f10-e164-40e9-8d47-2c797fddf4bb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac22d26e-9692-4077-9671-a7ba72478cb2"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="40" width="60" height="20" uuid="e5bb3898-d1d5-4b09-a369-941757f5f378">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="827cf70e-5058-4602-afba-b24872c9bde8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="40" width="100" height="20" uuid="8cd747a5-8952-49f6-abd4-735bc65de089">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="285910a2-5b2a-4ee3-9576-6e6815318a89"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="0" width="550" height="30" uuid="2ba74437-7843-4a24-868b-65339568d0c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{PERIODO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="115" y="0" width="244" height="20" uuid="26cf646a-c5a6-4507-862b-944061df2a5c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6ec1acaf-e268-47d8-b19c-700597c9f715"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="0" width="80" height="20" uuid="2652a632-72ca-4040-a880-c06c1468d705">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ac22d26e-9692-4077-9671-a7ba72478cb2"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="365" y="0" width="60" height="20" uuid="32e9fa17-9f38-4a17-9887-bf034f27b575">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="827cf70e-5058-4602-afba-b24872c9bde8"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="436" y="0" width="100" height="20" uuid="ac047393-4190-429a-b956-a4ddb4014e15">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="285910a2-5b2a-4ee3-9576-6e6815318a89"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

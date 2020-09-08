@@ -1,0 +1,19 @@
+<zk>
+	<vlayout hflex="1" vflex="1" apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.bombero.controlador.ERendirEvaluacionC')">
+		
+			<vlayout  style="overflow: auto;" hflex="1" visible="true"
+				vflex="1" id="vlPreguntas">
+			</vlayout>
+			<vlayout  id="vlRealizado" hflex="1" visible="false" vflex="1">
+				<label value="Evaluación Realizada con éxito" id="lblRealizado" style="font-size:30px;font-weight:bold;color:#FF0000"></label>
+			</vlayout>
+			<groupbox hflex="1">
+				
+					<div align="center" hflex="1">
+						<button label="Enviar Evaluación" id="btnEnviar" onClick="@command('enviarEvaluacion')"></button>
+					</div>
+				
+			</groupbox>
+	</vlayout>
+</zk>

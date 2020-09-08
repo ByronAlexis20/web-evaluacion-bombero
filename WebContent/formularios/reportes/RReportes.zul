@@ -1,0 +1,105 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winReportes" ?>
+<zk>
+	<window border="none" id="winReportes" hflex="1" vflex="1"
+		apply="com.bombero.controlador.RReporteC">
+		<vlayout hflex="1" vflex="1">
+			<groupbox hflex="1">
+				<caption label="Informe anual de aspirantes" />
+				<grid hflex="1">
+					<columns>
+						<column hflex="1" />
+					</columns>
+					<rows>
+						<row align="center">
+							<hlayout>Seleccione periodo</hlayout>
+						</row>
+						<row align="center">
+							<hlayout>
+								<combobox id="cboPeriodoAnual" width="300px"
+									model="@{winReportes$composer.listaPeriodoAnual}">
+									<template name="model">
+										<comboitem
+											label="${each.descripcion}" />
+									</template>
+								</combobox>
+							</hlayout>
+						</row>
+						<row align="center">
+							<hlayout>
+								<button label="Imprimir"
+									id="btnImprimirReporteAnual" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			
+			
+			<!-- REPORTE DE LOS MEJORES PROMEDIOS -->
+			
+			<groupbox hflex="1">
+				<caption label="Informe de los mejores promedios" />
+				<grid hflex="1">
+					<columns>
+						<column hflex="1" />
+					</columns>
+					<rows>
+						<row align="center">
+							<hlayout>Seleccione periodo</hlayout>
+						</row>
+						<row align="center">
+							<hlayout>
+								<combobox id="cboPeriodoMejores" width="300px"
+									model="@{winReportes$composer.listaPeriodoMejores}">
+									<template name="model">
+										<comboitem
+											label="${each.descripcion}" />
+									</template>
+								</combobox>
+							</hlayout>
+						</row>
+						<row align="center">
+							<hlayout>
+								<button label="Imprimir"
+									id="btnImprimirReporteMejores" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			
+			<!-- REPORTE DE LOS MEJOR PROMEDIADO -->
+			
+			<groupbox hflex="1">
+				<caption label="Informe del mejor promedio" />
+				<grid hflex="1">
+					<columns>
+						<column hflex="1" />
+					</columns>
+					<rows>
+						<row align="center">
+							<hlayout>Seleccione periodo</hlayout>
+						</row>
+						<row align="center">
+							<hlayout>
+								<combobox id="cboPeriodoMejor" width="300px"
+									model="@{winReportes$composer.listaPeriodoMejor}">
+									<template name="model">
+										<comboitem
+											label="${each.descripcion}" />
+									</template>
+								</combobox>
+							</hlayout>
+						</row>
+						<row align="center">
+							<hlayout>
+								<button label="Imprimir"
+									id="btnImprimirReporteMejor" />
+							</hlayout>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

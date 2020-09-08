@@ -1,0 +1,57 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winAsignacionGuardia" ?>
+<?link rel="stylesheet" type="text/css" href="/css/estilos.css"?>
+<zk>
+	<window border="none" hflex="1" vflex="1"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.bombero.controlador.ASAsignacionGuardiaC')" id="winAsignacionGuardia">
+		<vlayout hflex="1" vflex="1">
+			<groupbox hflex="1">
+				<hbox align="center" hflex="1" pack="center">
+					<label value="Asignación de Aspirantes a Compañías" style="font-size:20px;font-weight:bold;"/>
+				</hbox>
+			</groupbox>
+			<groupbox hflex="1" vflex="1">
+				<vlayout hflex="1" vflex="1">
+					<hbox align="center" hflex="1" pack="center">
+						<label value="Seleccione Compañía" style="font-size:14px;font-weight:bold;"/>
+					</hbox>
+					<hbox align="center" hflex="1" pack="center">
+						<combobox placeholder="Seleccione compañía" width="500px" id="cboCompania"
+								model="@load(vm.companias)" onSelect="@command('seleccionarGuardias')"
+								selectedItem="@bind(vm.companiaSeleccionada)">
+							<template name="model">
+								<comboitem label="${each.nombre}"/>
+							</template>
+						</combobox>
+					</hbox>
+					<hbox align="center" hflex="1" pack="center">
+						<button label="Agregar Guardia" id="btnAgregarGuardia" onClick="@command('agregarGuardia')"/>
+						<button label="Quitar Guardia" id="btnQuitarGuardia" onClick="@command('quitarGuardia')"/>
+					</hbox>
+					<groupbox hflex="1" vflex="1">
+						<listbox id="lstGuardias" hflex="1" vflex="1"
+								model="@load(vm.guardiaLista)"
+								selectedItem="@bind(vm.guardiaSeleccionado)">
+							<listhead>
+								<listheader label="Compañía" />
+								<listheader label="Bombero"/> 
+								<listheader label="Fecha Inicio"/>
+								<listheader label="Fecha Fin"/>
+								<listheader label="Estado"/>
+							</listhead>
+							<template name="model">
+								<listitem>
+									<listcell label="@load{each.compania.nombre}" />
+									<listcell label="@load{each.personalAutorizado.persona.nombre} ${each.personalAutorizado.persona.apellido}"/>
+									<listcell label="@load{each.fechaInicio} @converter('formattedDate', format='yyyy/MM/dd')" />
+									<listcell label="@load{each.fechaFin} @converter('formattedDate', format='yyyy/MM/dd')" />
+									<listcell label="@load{each.estado}" />
+								</listitem>
+							</template>
+						</listbox>
+					</groupbox>
+				</vlayout>
+			</groupbox>
+		</vlayout>
+	</window>
+</zk>

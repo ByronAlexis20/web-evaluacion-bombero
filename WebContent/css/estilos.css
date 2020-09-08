@@ -1,0 +1,15 @@
+.btnNuevo {
+  padding: .375rem .75rem;
+  border-radius: .25rem;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color .15s ease-in-out;
+}
+
+.btnNuevo:hover, .btnNuevo:focus {
+  background-color: #0069d9;
+}
+
+.btnNuevo:active {
+  background-color: #0062cc;
+}

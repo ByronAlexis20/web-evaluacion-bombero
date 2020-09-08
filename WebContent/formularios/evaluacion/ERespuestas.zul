@@ -1,0 +1,38 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" arg0="./winRespuestas" ?>
+<?script src="/webjars/bootstrap/4.0.0/js/bootstrap.min.js" ?>
+<?link rel="stylesheet" href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" ?>
+<zk>
+	<window id="winRespuestas" border="normal"  width="37%"
+		 apply="com.bombero.controlador.ERespuestasC">
+		<caption sclass="fn-caption"
+			label="RESPUESTAS" />
+		<vlayout>
+			<grid hflex="1">
+				<columns>
+					<column align="right" hflex="min" />
+					<column/>
+				</columns>
+				<rows>
+					<row>
+						<cell>Correcta:</cell>
+						<cell>
+							<checkbox id="chkCorrecta" checked="false"/>
+						</cell>
+					</row>
+					<row>
+						<cell sclass="row-title">Respuesta:</cell>
+						<cell>
+							<textbox id="txtRespuesta" width="100%" multiline="true"/>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<hlayout hflex="1" height="1">
+				<div align="center" hflex="1">
+					<button id="btnAgregar" label="Agregar"/>
+					<button id="btnSalir" label="Salir"/>			
+				</div>
+			</hlayout>
+		</vlayout>
+	</window>
+</zk>
